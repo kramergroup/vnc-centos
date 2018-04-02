@@ -15,6 +15,8 @@ The container runs a VNC server on port 5900. This port has to be mapped for VNC
 docker run -d -p 5900:5900 kramergroup/vnc-centos x11-novnc
 ```
 
+Once the container is running, point a VNC viewer to `localhost:5900`. The viewer should not configure a password etc.
+
 ## User login
 
 A connecting VNC client will be presented with a graphical login screen, but no users are configured out-of-the-box. Hence, login will
