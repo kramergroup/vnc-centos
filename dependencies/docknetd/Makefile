@@ -13,7 +13,7 @@ bin/docknetd: bin src/app.go
 
 .PHONY: install
 install: bin bin/docknetd
-	cp bin/docknetd $ASSET
+	cp bin/docknetd ${ASSET}
 
 bin:
 	mkdir -p bin
