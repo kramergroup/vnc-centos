@@ -1,0 +1,21 @@
+[SddmGreeterTheme]
+Name=Breeze Text Only
+Name[x-test]=xxBreeze Text Onlyxx
+
+Description=Breeze Text Only Theme
+Description[x-test]=xxBreeze Text Only Themexx
+
+Original Author=David Edmundson
+Original Copyright=(c) 2014, David Edmundson
+License=CC-BY-SA
+Tampered=Rog13
+Type=sddm-theme
+Version=0.1
+Website=https://github.com/sddm/sddm
+Screenshot=preview.png
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Original Email=davidedmundson@kde.org
+Theme-Id=breezetextonly
+Theme-API=2.0
