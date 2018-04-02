@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/fsouza/go-dockerclient"
 	"io"
 	"net"
 	"os"
@@ -16,29 +15,29 @@ type runner struct {
 }
 
 func main() {
-	endpoint := "unix:///var/run/docker.sock"
+	//endpoint := "unix:///var/run/docker.sock"
 	runners := make(chan runner, 10)
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, os.Kill)
 	go func() {
 		for {
-			var cont *docker.Container
-			client, _ := docker.NewClient(endpoint)
-			cont, _ = client.CreateContainer(docker.CreateContainerOptions{"", &docker.Config{Image: os.Args[1]}, nil})
-			_ = client.StartContainer(cont.ID, nil)
-			cont, _ = client.InspectContainer(cont.ID)
-			fmt.Println("Started ", cont.NetworkSettings.IPAddress)
+			//var cont *docker.Container
+			//client, _ := docker.NewClient(endpoint)
+			//cont, _ = client.CreateContainer(docker.CreateContainerOptions{"", &docker.Config{Image: os.Args[1]}, nil})
+			//_ = client.StartContainer(cont.ID, nil)
+			//cont, _ = client.InspectContainer(cont.ID)
+			//fmt.Println("Started ", cont.NetworkSettings.IPAddress)
 			select {
-			case runners <- runner{IP: cont.NetworkSettings.IPAddress, ID: cont.ID}:
+			case runners <- runner{/*IP: cont.NetworkSettings.IPAddress, ID: cont.ID*/}:
 				fmt.Println("Spawned")
 			case sig := <-c:
 				fmt.Println("Signal", sig)
-				client.RemoveContainer(docker.RemoveContainerOptions{ID: cont.ID, Force: true})
-				fmt.Println("Killing ", cont.ID)
+				//client.RemoveContainer(docker.RemoveContainerOptions{ID: cont.ID, Force: true})
+				fmt.Println("Killing ", "0"/*cont.ID*/)
 				close(runners)
 				for tokill := range runners {
 					fmt.Println("Killing ", tokill.ID)
-					client.RemoveContainer(docker.RemoveContainerOptions{ID: tokill.ID, Force: true})
+					//client.RemoveContainer(docker.RemoveContainerOptions{ID: tokill.ID, Force: true})
 				}
 				os.Exit(0)
 			}
@@ -53,9 +52,9 @@ func main() {
 			defer conn.Close()
 			runner := <-runners
 			defer func() {
-				client, _ := docker.NewClient(endpoint)
+				//client, _ := docker.NewClient(endpoint)
 				fmt.Println("Killing ", runner.ID)
-				client.RemoveContainer(docker.RemoveContainerOptions{ID: runner.ID, Force: true})
+				//client.RemoveContainer(docker.RemoveContainerOptions{ID: runner.ID, Force: true})
 			}()
 			trys := 0
 			var err error
