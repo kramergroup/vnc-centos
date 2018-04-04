@@ -37,6 +37,7 @@ DISPLAY=""
 
 FBFILE=$(mktemp /tmp/.vncbootstrap-fb-XXXXXX)
 AUTHSOCKET=$(mktemp /tmp/.vncbootstrap-auth-XXXXXX)
+LOGFILE=$(mktemp /var/log/vncd-XXXXXX.log)
 
 # Start X Server
 exec 6<> ${FBFILE}
@@ -49,5 +50,5 @@ done
 echo "X server display: ${DISPLAY}"
 
 # Start VNC Server
-/usr/bin/x11vnc -xkb -noxrecord -noxfixes -noxdamage -rfbport ${PORT} -rfbport ${PORTV6} \
-                -display :${DISPLAY} -auth ${AUTHSOCKET} -ncache 10
+/usr/bin/x11vnc -xkb -noxrecord -noxfixes -noxdamage -rfbport ${PORT} -rfbportv6 ${PORTV6} \
+                -display :${DISPLAY} -auth ${AUTHSOCKET} -ncache 10 -o ${LOGFILE}
