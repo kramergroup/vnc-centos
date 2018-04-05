@@ -12,7 +12,7 @@ RUN yum -y update && \
 # Install vncd
 RUN mkdir -p /install && \
     cd /install && \
-    curl -O -L https://github.com/kramergroup/vncd/releases/download/v0.1.0/vncd-v0.1.2.tar.gz && \
+    curl -O -L https://github.com/kramergroup/vncd/releases/download/v0.1.2/vncd-v0.1.2.tar.gz && \
     tar xzf vncd-v0.1.2.tar.gz -C /sbin vncd && \
     cd / && rm -rf /install
 # COPY assets/vncd /sbin/vncd
