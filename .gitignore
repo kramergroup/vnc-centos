@@ -1,3 +1,4 @@
 .DS_Store
 dependencies/docknetd/bin
 dependencies/vncd/src/github.com
+assets/vncd
