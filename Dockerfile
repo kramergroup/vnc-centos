@@ -9,12 +9,13 @@ RUN yum -y update && \
     yum -y install urw-fonts && \
     yum clean all
 
-# Install vncproxy
+# Install vncd
 RUN mkdir -p /install && \
     cd /install && \
-    curl -O -L https://github.com/kramergroup/vncd/releases/download/v0.1.0/vncd-v0.1.0.tar.gz && \
-    tar xzf vncd-v0.1.0.tar.gz -C /sbin vncd && \
+    curl -O -L https://github.com/kramergroup/vncd/releases/download/v0.1.0/vncd-v0.1.1.tar.gz && \
+    tar xzf vncd-v0.1.1.tar.gz -C /sbin vncd && \
     cd / && rm -rf /install
+# COPY assets/vncd /sbin/vncd
 
 # Configure X11 to run headless w/o graphics card
 # Note: edit assets/xorg.conf to change resolution
