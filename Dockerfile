@@ -10,7 +10,11 @@ RUN yum -y update && \
     yum clean all
 
 # Install vncproxy
-COPY assets/vncd /sbin/vncd
+RUN mkdir -p /install && \
+    cd /install && \
+    curl -O -L https://github.com/kramergroup/vncd/releases/download/v0.1.0/vncd-v0.1.0.tar.gz && \
+    tar xzf vncd-v0.1.0.tar.gz -C /sbin vncd && \
+    cd / && rm -rf /install
 
 # Configure X11 to run headless w/o graphics card
 # Note: edit assets/xorg.conf to change resolution
