@@ -33,4 +33,4 @@ COPY assets/entrypoint.sh /entrypoint.sh
 STOPSIGNAL SIGRTMIN+3
 EXPOSE 5900
 
-CMD [ "/entrypoint.sh" ]
+CMD [ "/sbin/vncd" ]
