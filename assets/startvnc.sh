@@ -46,11 +46,14 @@ DISPLAY=""
 FBFILE=$(mktemp /tmp/.vncbootstrap-fb-XXXXXX)
 LOGFILE=$(mktemp /var/log/vncd-XXXXXX.log)
 
-export XAUTHORITY=$(mktemp /root/.vncbootstrap-auth-XXXXXX)
+# This must match the value in /etc/slim.conf
+export XAUTHORITY=$(grep ^authfile /etc/slim.conf | awk '{print $2}')
 
 # Start X Server
+# slim.conf needs to pass -displayfd 6 to X server
 exec 6<> ${FBFILE}
-/usr/bin/startx -- -displayfd 6 &
+slim &
+# /usr/bin/startx -- -displayfd  &
 #/usr/bin/X -displayfd 6 -auth ${AUTHSOCKET} &
 exec 6<&- # close file
 

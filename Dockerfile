@@ -1,13 +1,22 @@
 FROM centos:7
 
+ENV SLIM_VERSION=1.3.6
+
 RUN yum -y update && \
     yum -y install epel-release && \
     yum -y groupinstall "X Window System" && \
     yum -y install openbox x11vnc && \
-    yum -y install sddm && \
     yum -y install net-tools which xterm && \
     yum -y install urw-fonts && \
     yum clean all
+
+# Install slim
+RUN curl -O -L https://github.com/kramergroup/slim/releases/download/v1.3.6-p1/slim-1.3.6-0.i686.rpm && \
+    yum -y install slim-1.3.6-0.i686.rpm && \
+    rm slim-1.3.6-0.i686.rpm
+
+# Important for slim to find its shared library
+ENV LD_LIBRARY_PATH /usr/local/lib:/usr/lib:${LD_LIBRARY_PATH}
 
 # Install vncd
 RUN mkdir -p /install && \
