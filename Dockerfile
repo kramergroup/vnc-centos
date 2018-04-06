@@ -32,8 +32,7 @@ COPY assets/xorg.conf /etc/X11/xorg.conf
 COPY assets/xinitrc /etc/X11/xinit/xinitrc
 
 # Install some additional themes for the window Manager and configuration
-COPY assets/sddm-themes /usr/share/sddm/themes
-COPY assets/sddm.conf /etc/sddm.conf
+COPY assets/slim.conf /etc/slim.conf
 
 # Install openbox assets
 COPY assets/openbox/menu.xml /etc/xdg/openbox/menu.xml
